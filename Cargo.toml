@@ -1,0 +1,40 @@
+[package]
+name = "antibot"
+version = "0.1.0"
+edition = "2021"
+description = "Security Protective Botnet Defensive — CLI de detecção e banimento de tráfego suspeito (rate-based anomaly detection) com blacklist compartilhada via banco de dados"
+
+[[bin]]
+name = "antibot"
+path = "src/main.rs"
+
+[dependencies]
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Banco de dados — Postgres por padrão. Pra usar MySQL, troque a feature
+# "postgres" por "mysql" abaixo e ajuste a connection string (ver README).
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono"] }
+
+# SSH pra modo remoto (poll de logs em servidores externos)
+openssh = "0.10"
+
+# Parsing de log
+regex = "1"
+chrono = { version = "0.4", features = ["serde"] }
+
+# Config
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+
+# IP
+ipnetwork = "0.20"
+
+# Logging da própria ferramenta
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+anyhow = "1"

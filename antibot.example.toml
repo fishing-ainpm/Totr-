@@ -1,0 +1,23 @@
+# Copie pra antibot.toml e ajuste
+
+[database]
+# Postgres. Ex: "postgres://user:senha@localhost/antibot"
+url = "postgres://antibot:senha@localhost/antibot"
+
+[detector]
+window_seconds = 10      # janela deslizante de análise
+warn_threshold = 40      # requisições na janela pra sinalizar "suspeito"
+ban_threshold = 100       # requisições na janela pra banir automaticamente
+ban_ttl_hours = 24        # 0 = ban permanente
+
+[[servers]]
+name = "meu-site-prod"
+mode = "local"
+log_path = "/var/log/nginx/access.log"
+
+[[servers]]
+name = "meu-site-edge"
+mode = "remote"
+host = "203.0.113.10"
+ssh_user = "deploy"
+log_path = "/var/log/nginx/access.log"
